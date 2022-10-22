@@ -5,10 +5,20 @@ import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CampsitesDirectoryPage from "./pages/CampsitesDirectoryPage";
-import CampsiteDetailPage from './pages/CampsiteDetailPage';
+import CampsiteDetailPage from "./pages/CampsiteDetailPage";
 import "./App.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchCampsites } from "./features/campsites/campsitesSlice";
 
 function App() {
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCampsites());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Header />
@@ -17,7 +27,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="directory" element={<CampsitesDirectoryPage />} />
-        <Route path='directory/:campsiteId' element={<CampsiteDetailPage />} />
+        <Route path="directory/:campsiteId" element={<CampsiteDetailPage />} />
       </Routes>
       <Footer />
     </div>
